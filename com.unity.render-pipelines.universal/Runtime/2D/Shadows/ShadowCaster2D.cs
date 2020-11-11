@@ -132,9 +132,17 @@ namespace UnityEngine.Experimental.Rendering.Universal
         {
             ShadowCasterGroup2DManager.RemoveFromShadowCasterGroup(this, m_ShadowCasterGroup);
         }
+        
+        private GameObject player;
+        void Start()
+        {
+            this.player = GameObject.Find("Player");
+        }
 
         public void Update()
         {
+            if (player != null && Vector2.Distance(this.transform.position, player.transform.position) > 8) return;
+            
             Renderer renderer = GetComponent<Renderer>();
             m_HasRenderer = renderer != null;
 
